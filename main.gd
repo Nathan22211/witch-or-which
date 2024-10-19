@@ -55,7 +55,7 @@ func _on_mob_timer_timeout() -> void:
 	ghost_spawn_location.progress_ratio = randf()
 
 	# Set the mob's direction perpendicular to the path direction.
-	var direction = mob_spawn_location.rotation + PI / 2
+	var direction = mob_spawn_location.rotation# + PI / 2
 	var ghost_direction = ghost_spawn_location.rotation + PI / 2
 
 	# Set the mob's position to a random location.
@@ -71,14 +71,22 @@ func _on_mob_timer_timeout() -> void:
 	# Choose the velocity for the mob.
 	var velocity = Vector2(randf_range(250.0, 500.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
-	var ghost_velocity = Vector2(randf_range(50.0, 1000.0), 0.0)
-	ghost.linear_velocity = ghost_velocity.rotated(ghost_direction)
+	if score > 25:
+		var ghost_velocity = Vector2(randf_range(50.0, 1000.0), 0.0)
+		ghost.linear_velocity = ghost_velocity.rotated(ghost_direction)
+	else:
+		var ghost_velocity = Vector2(randf_range(50.0, 500.0), 0.0)
+		ghost.linear_velocity = ghost_velocity.rotated(ghost_direction)
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-	if randf_range(1, 100) > 85:
+	if score > 20 and randf_range(1, 50) > 20:
 		add_child(mob)
-	if randf_range(1, 10) > 5:
+	elif score > 10 and randf_range(1, 100) > 85:
+		add_child(mob)
+	if score > 30 and randf_range(1, 10) > 3:
+		add_child(ghost)
+	elif score > 15 and randf_range(1, 10) > 5:
 		add_child(ghost)
 	pass
 	 # Replace with function body.
