@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://c7thmo2o1i8rx"]
+[gd_scene load_steps=9 format=4 uid="uid://c7thmo2o1i8rx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yrw71"]
 [ext_resource type="PackedScene" uid="uid://chm2bubbd4a7b" path="res://mob.tscn" id="2_fsd2k"]
 [ext_resource type="PackedScene" uid="uid://m1gvw33gy2xi" path="res://area_2d.tscn" id="3_g5p0x"]
+[ext_resource type="PackedScene" uid="uid://dqrjlp1bqrilp" path="res://rigid_body_2d.tscn" id="3_ycggo"]
 [ext_resource type="PackedScene" uid="uid://kklkjt1nv2ad" path="res://hud.tscn" id="4_n8iwg"]
+[ext_resource type="Texture2D" uid="uid://cb333cyilblwp" path="res://Untitled14_20241019110310.png" id="5_dwspk"]
 
 [sub_resource type="Curve2D" id="Curve2D_822f7"]
 _data = {
@@ -18,6 +20,13 @@ loop = true
 [node name="main" type="Node"]
 script = ExtResource("1_yrw71")
 mob_scene = ExtResource("2_fsd2k")
+ghost_scene = ExtResource("3_ycggo")
+
+[node name="backround" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(920, 152)
+scale = Vector2(0.96218, 0.91473)
+texture = ExtResource("5_dwspk")
 
 [node name="player" parent="." instance=ExtResource("3_g5p0x")]
 
