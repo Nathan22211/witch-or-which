@@ -76,6 +76,8 @@ func _on_mob_timer_timeout() -> void:
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
+	if randf_range(1, 100) > 85:
+		add_child(mob)
 	if randf_range(1, 10) > 5:
 		add_child(ghost)
 	pass

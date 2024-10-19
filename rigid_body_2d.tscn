@@ -17,7 +17,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ghost" type="RigidBody2D"]
+[node name="ghost" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_3bxbc")
