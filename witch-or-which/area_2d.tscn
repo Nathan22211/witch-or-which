@@ -28,3 +28,5 @@ animation = &"witch"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.5, 4.5)
 shape = SubResource("RectangleShape2D_b5jil")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
