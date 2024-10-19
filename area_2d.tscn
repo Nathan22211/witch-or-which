@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://m1gvw33gy2xi"]
+
+[ext_resource type="Texture2D" uid="uid://bd1nquatfvml4" path="res://witch.png" id="1_0ngwk"]
+[ext_resource type="Script" path="res://player.gd" id="1_vhfri"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rh3tt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0ngwk")
+}],
+"loop": true,
+"name": &"witch",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5jil"]
+size = Vector2(57, 47)
+
+[node name="player" type="Area2D"]
+script = ExtResource("1_vhfri")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rh3tt")
+animation = &"witch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.5, 4.5)
+shape = SubResource("RectangleShape2D_b5jil")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
