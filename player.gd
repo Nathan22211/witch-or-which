@@ -30,15 +30,20 @@ func _process(delta):
 	position = position.clamp(Vector2.ZERO, screen_size)
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
+		speed = 200
 	else:
 		$AnimatedSprite2D.flip_h = false
 
 
 func _on_body_entered(body):
-	hide() # Player disappears after being hit.
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
+	if body.is_in_group("mobs"):
+		
+		hide() # Player disappears after being hit.
+		hit.emit()
+		# Must be deferred as we can't change physics properties on a physics callback.
+		$CollisionShape2D.set_deferred("disabled", true)
+	elif body.is_in_group("cloud"):
+		speed = 100
 
 func start(pos):
 	position = pos

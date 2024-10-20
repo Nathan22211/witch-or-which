@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var ghost_scene: PackedScene
+@export var cloud_scene: PackedScene
 var score
 
 # Called when the node enters the scene tree for the first time. # Replace with function body.
@@ -28,6 +29,7 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
 	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("cloud", "queue_free")
 	$music.play() # Replace with function body.
 
 
@@ -47,26 +49,33 @@ func _on_mob_timer_timeout() -> void:
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 	var ghost = ghost_scene.instantiate()
+	var cloud = cloud_scene.instantiate()
 
 	# Choose a random location on Path2D.
 	var mob_spawn_location = $MobPath/MobSpawnLocation
 	var ghost_spawn_location = $MobPath/MobSpawnLocation
+	var cloud_spawn_location = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
 	ghost_spawn_location.progress_ratio = randf()
+	cloud_spawn_location.progress_ratio = randf()
 
 	# Set the mob's direction perpendicular to the path direction.
 	var direction = mob_spawn_location.rotation# + PI / 2
 	var ghost_direction = ghost_spawn_location.rotation + PI / 2
+	var cloud_direction = ghost_spawn_location.rotation + PI / 2
 
 	# Set the mob's position to a random location.
 	mob.position = mob_spawn_location.position
 	ghost.position = ghost_spawn_location.position
+	cloud.position = ghost_spawn_location.position
 
 	# Add some randomness to the direction.
 	direction += randf_range(-PI / 4, PI / 4)
 	mob.rotation = direction
 	ghost_direction += randf_range(-PI / 4, PI / 4)
 	ghost.rotation = ghost_direction
+	cloud_direction += randf_range(-PI / 4, PI / 4)
+	cloud.rotation = cloud_direction
 
 	# Choose the velocity for the mob.
 	var velocity = Vector2(randf_range(250.0, 500.0), 0.0)
@@ -77,7 +86,8 @@ func _on_mob_timer_timeout() -> void:
 	else:
 		var ghost_velocity = Vector2(randf_range(50.0, 500.0), 0.0)
 		ghost.linear_velocity = ghost_velocity.rotated(ghost_direction)
-
+	var cloud_velocity = Vector2(randf_range(100.0, 200.0), 0.0)
+	cloud.linear_velocity = cloud_velocity.rotated(cloud_direction)
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 	if score > 20 and randf_range(1, 50) > 20:
@@ -88,6 +98,10 @@ func _on_mob_timer_timeout() -> void:
 		add_child(ghost)
 	elif score > 15 and randf_range(1, 10) > 5:
 		add_child(ghost)
+	if score > 30 and randf_range(1, 2) == 2:
+		add_child(cloud)
+	if score > 20 and randf_range(1, 5) > 2:
+		add_child(cloud)
 	pass
 	 # Replace with function body.
 func _ready() -> void:

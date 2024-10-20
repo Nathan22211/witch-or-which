@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://c7thmo2o1i8rx"]
+[gd_scene load_steps=10 format=4 uid="uid://c7thmo2o1i8rx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yrw71"]
 [ext_resource type="PackedScene" uid="uid://chm2bubbd4a7b" path="res://mob.tscn" id="2_fsd2k"]
 [ext_resource type="PackedScene" uid="uid://m1gvw33gy2xi" path="res://area_2d.tscn" id="3_g5p0x"]
 [ext_resource type="PackedScene" uid="uid://dqrjlp1bqrilp" path="res://rigid_body_2d.tscn" id="3_ycggo"]
+[ext_resource type="PackedScene" uid="uid://c6no0ujsdhqu8" path="res://cloud.tscn" id="4_5pg6j"]
 [ext_resource type="PackedScene" uid="uid://kklkjt1nv2ad" path="res://hud.tscn" id="4_n8iwg"]
 [ext_resource type="Texture2D" uid="uid://cb333cyilblwp" path="res://Untitled14_20241019110310.png" id="5_dwspk"]
 
@@ -21,6 +22,7 @@ loop = true
 script = ExtResource("1_yrw71")
 mob_scene = ExtResource("2_fsd2k")
 ghost_scene = ExtResource("3_ycggo")
+cloud_scene = ExtResource("4_5pg6j")
 
 [node name="backround" type="Sprite2D" parent="."]
 z_index = -1
