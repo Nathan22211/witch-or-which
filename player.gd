@@ -31,7 +31,7 @@ func _process(delta):
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
 		speed = 200
-	else:
+	elif velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
 
 
